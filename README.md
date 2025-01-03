@@ -6,6 +6,17 @@ if using docker make use ture you docker engine install on your computer and run
 ## install docker
 https://docs.docker.com/engine/install/#server
 
+# content of environment file
+
+    DJANGO_DEBUG=1
+    DJANGO_SECRET_KEY=secretkey123
+    
+    DB_DATABASE_NAME=
+    DB_USER=
+    DB_PASSWORD=
+    DB_HOST=
+    DB_PORT=
+
 ## Build and run the services on docker
  to build and run the services on docker, there are couples of make command defined in the makefile
 
