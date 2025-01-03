@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+    volumes:
+      - ./:/app/:delegated
+    working_dir: /app/kami
+    user: root
+    ports:
+      - "0.0.0.0:8000:8000"
+    command: bash
+    networks:
+      - default
+    cap_add:
+      - SYS_PTRACE
+    depends_on:
+      - psql
+
+  psql:
+    image: postgres:16-alpine
+    hostname: psql
+    container_name: psql
+    environment:
+      - POSTGRES_DATABASE_NAME=kamibackend
+      - POSTGRES_PASSWORD=kami_db
+      - POSTGRES_USER=kami_db
+    networks:
+      - default
+    ports:
+      - "0.0.0.0:5432:5432/tcp"
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
+    driver: local
